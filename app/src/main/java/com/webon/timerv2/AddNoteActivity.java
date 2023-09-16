@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,12 +17,15 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 
 import com.webon.timerv2.Adapters.AddNoteAdapter;
+import com.webon.timerv2.Database.NoteDatabase;
+import com.webon.timerv2.Notes.Note;
 import com.webon.timerv2.Notes.SubNote;
 import com.webon.timerv2.R;
 
 import java.util.ArrayList;
 
 public class AddNoteActivity extends AppCompatActivity {
+    NoteDatabase noteDatabase;
     private AddNoteAdapter addNoteAdapter; Handler handler;
     private EditText editTextTitle, editTextCount;
     private RadioButton buttonTime, buttonCount;
@@ -60,9 +64,21 @@ public class AddNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+        Context context = getApplicationContext();
+        noteDatabase = NoteDatabase.getInstance(context);
         initViews();
         onClickNoteType();
         onCLickSubtask();
+        onClickSave();
+    }
+
+    private void onClickSave() {
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveNote();
+            }
+        });
     }
 
     private void onClickNoteType() {
@@ -120,6 +136,38 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void saveNote() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Note note;
+                String title;
+                if (buttonCount.isChecked()) {
+                    title = "Count";
+                } else {
+                    title = "Time";
+                }
+
+                String currentCount = "0";
+                String goalCount = "0";
+                int countAim = 0;
+                boolean isTime = false;
+
+                note = new Note(title, currentCount, goalCount, countAim, isTime, subNoteList);
+                noteDatabase.notesDao().add(note);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                });
+
+
+            }
+        });
+        thread.start();
     }
 
 

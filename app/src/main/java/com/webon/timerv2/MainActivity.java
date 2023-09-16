@@ -11,12 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.webon.timerv2.Database.NoteDatabase;
 import com.webon.timerv2.Fragments.CurrentFragment;
 import com.webon.timerv2.Fragments.HistoryFragment;
 import com.webon.timerv2.Fragments.OptionFragment;
 import com.webon.timerv2.MVVM.MainViewModel;
+import com.webon.timerv2.Notes.Note;
 
 public class MainActivity extends AppCompatActivity {
+    NoteDatabase noteDatabase;
 
     private Button buttonFragmentCurrent, buttonFragmentUser, buttonFragmentHistory;
     public static TextView textViewGold;
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
         initViews();
+        /*noteDatabase = NoteDatabase.getInstance(context);
+        textViewGold.setText(noteDatabase.notesDao().getNotes().getValue().size());*/
 
         buttonFragmentCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
