@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,11 +25,15 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder>{
     private List<Note> notes = new ArrayList<>();
     private OnNoteClickListener noteClickListener;
+    NoteDatabase noteDatabase;
 
     public interface OnNoteClickListener {
         void onNoteClick(Note note);
     }
 
+    public NotesAdapter(NoteDatabase noteDatabase) {
+        this.noteDatabase = noteDatabase;
+    }
 
     public void setOnNoteClickListener(OnNoteClickListener onNoteClickListener) {
         this.noteClickListener = onNoteClickListener;
@@ -73,17 +79,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                 }
             }
         });
-        /*if (note.isTime()) {
-            *//*view.buttonsTimer.OnClickButton(note, noteClickListener);
-            view.buttonsTimer.NoteUpdateDate(note);*//*
-
-
-        } else {
-            *//*view.buttonsCount.OnClickButton(note, noteClickListener);
-            view.buttonsCount.NoteUpdateDate(note);*//*
-            //view.buttonShowInfo.OnClickButtonShow(note);
-
-        }*/
+        view.imageButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        noteDatabase.notesDao().remove(note.getId());
+                    }
+                });
+                thread.start();
+            }
+        });
 
     }
 
@@ -123,18 +130,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private RecyclerView recyclerView;
-        private Button buttonHint;
+        private Button buttonHint; private ImageView imageButtonDelete, imageButtonDone;
         public NoteViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
             if (viewType == 0) {
                 textView = itemView.findViewById(R.id.textViewTypeTask);
                 recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
                 buttonHint = itemView.findViewById(R.id.buttonHint);
+                imageButtonDelete = itemView.findViewById(R.id.right_view);
             }
             else {
                 textView = itemView.findViewById(R.id.textViewTypeTask);
                 recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
                 buttonHint = itemView.findViewById(R.id.buttonHint);
+                imageButtonDelete = itemView.findViewById(R.id.right_view);
             }
 
         }

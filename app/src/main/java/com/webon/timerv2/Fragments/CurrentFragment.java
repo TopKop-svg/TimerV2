@@ -33,7 +33,7 @@ public class CurrentFragment extends Fragment {
         buttonAddNote = view.findViewById(R.id.buttonAddNote);
         recyclerView = view.findViewById(R.id.recyclerViewNotes);
         noteDatabase = NoteDatabase.getInstance(getContext());
-        notesAdapter = new NotesAdapter();
+        notesAdapter = new NotesAdapter(noteDatabase);
 
     }
 

@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:background="#5F6DB8"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -21,6 +23,7 @@
     <ProgressBar
         android:id="@+id/progressBarSubtask"
         style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_bar_style"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3" />
