@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.webon.timerv2.Notes.Note;
 
-@Database(entities = {Note.class}, version = 2)
+@Database(entities = {Note.class}, version = 3)
 public abstract class NoteDatabase extends RoomDatabase {
     private static NoteDatabase instance = null;
     private static final String DB_NOTE = "notes.db";

@@ -52,6 +52,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     public void onBindViewHolder(NoteViewHolder view, int position) {
         Note note = notes.get(position);
         view.textView.setText(note.getTitle());
+
         if (!note.getSubNotesList().isEmpty()){
             CurrentNoteSubtaskAdapter currentNoteSubtaskAdapter = new CurrentNoteSubtaskAdapter(note.getSubNotesList());
             view.recyclerView.setAdapter(currentNoteSubtaskAdapter);
@@ -125,9 +126,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         private Button buttonHint;
         public NoteViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textViewTypeTask);
-            recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
-            buttonHint = itemView.findViewById(R.id.buttonHint);
+            if (viewType == 0) {
+                textView = itemView.findViewById(R.id.textViewTypeTask);
+                recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
+                buttonHint = itemView.findViewById(R.id.buttonHint);
+            }
+            else {
+                textView = itemView.findViewById(R.id.textViewTypeTask);
+                recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
+                buttonHint = itemView.findViewById(R.id.buttonHint);
+            }
 
         }
     }

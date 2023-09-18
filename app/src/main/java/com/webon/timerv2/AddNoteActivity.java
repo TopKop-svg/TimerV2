@@ -144,16 +144,19 @@ public class AddNoteActivity extends AppCompatActivity {
             public void run() {
                 Note note;
                 String title;
+                boolean isTime;
                 if (buttonCount.isChecked()) {
                     title = "Count";
+                    isTime = false;
                 } else {
                     title = "Time";
+                    isTime = true;
                 }
 
                 String currentCount = "0";
                 String goalCount = "0";
                 int countAim = 0;
-                boolean isTime = false;
+
 
                 note = new Note(title, currentCount, goalCount, countAim, isTime, subNoteList);
                 noteDatabase.notesDao().add(note);
