@@ -4,11 +4,16 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapter;
+import com.webon.timerv2.Fragments.CurrentFragment;
+import com.webon.timerv2.MainActivity;
 import com.webon.timerv2.Notes.Note;
 import com.webon.timerv2.R;
 
@@ -47,17 +52,37 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     public void onBindViewHolder(NoteViewHolder view, int position) {
         Note note = notes.get(position);
         view.textView.setText(note.getTitle());
-        if (note.isTime()) {
-            /*view.buttonsTimer.OnClickButton(note, noteClickListener);
-            view.buttonsTimer.NoteUpdateDate(note);*/
+        if (!note.getSubNotesList().isEmpty()){
+            CurrentNoteSubtaskAdapter currentNoteSubtaskAdapter = new CurrentNoteSubtaskAdapter(note.getSubNotesList());
+            view.recyclerView.setAdapter(currentNoteSubtaskAdapter);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(new CurrentFragment().getRecyclerViewContext());
+            view.recyclerView.setLayoutManager(layoutManager);
+
+        }
+
+        view.buttonHint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (note.isHint()) {
+                    note.setHint(false);
+                    view.recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    note.setHint(true);
+                    view.recyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
+        /*if (note.isTime()) {
+            *//*view.buttonsTimer.OnClickButton(note, noteClickListener);
+            view.buttonsTimer.NoteUpdateDate(note);*//*
 
 
         } else {
-            /*view.buttonsCount.OnClickButton(note, noteClickListener);
-            view.buttonsCount.NoteUpdateDate(note);*/
+            *//*view.buttonsCount.OnClickButton(note, noteClickListener);
+            view.buttonsCount.NoteUpdateDate(note);*//*
             //view.buttonShowInfo.OnClickButtonShow(note);
 
-        }
+        }*/
 
     }
 
@@ -96,10 +121,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
+        private RecyclerView recyclerView;
+        private Button buttonHint;
         public NoteViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
             textView = itemView.findViewById(R.id.textViewTypeTask);
-
+            recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
+            buttonHint = itemView.findViewById(R.id.buttonHint);
 
         }
     }

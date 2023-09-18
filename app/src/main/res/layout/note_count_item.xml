@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:background="#8A2626"
+    android:layout_height="wrap_content"
+    android:background="#BC8484"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_marginBottom="2dp"
@@ -20,9 +20,9 @@
     <ImageView
         android:id="@+id/left_view"
         android:layout_width="90dp"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#ff5722"
+        android:background="#4CAF50"
         android:gravity="center"
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
@@ -31,40 +31,54 @@
     <ImageView
         android:id="@+id/right_view"
         android:layout_width="90dp"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="#ff5722"
+        android:background="#BA1414"
         android:gravity="center"
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
         android:src="@drawable/ic_delete"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/drag_item"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/drag_item"
+        android:layout_width="match_parent"
+        android:background="#BC8484"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewTypeTask"
             android:layout_width="match_parent"
-            android:background="#8A2626"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#BC8484"
+            android:text="TextView"
+            android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
-            >
-            <TextView
-                android:id="@+id/textViewTypeTask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="40dp"
-                android:background="#8A2626"
-                android:layout_weight="1"
-                android:text="TextView"
-                tools:ignore="MissingConstraints" >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSubtaskNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTypeTask"
+            app:layout_constraintVertical_bias="0.0">
 
-            </TextView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
-
-
-
-
-
-
-
-
+        <Button
+            android:id="@+id/buttonHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hint"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTypeTask"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.webon.timerv2.MVVM.SwipeLayout>

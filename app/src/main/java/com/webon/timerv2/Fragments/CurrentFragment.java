@@ -61,6 +61,9 @@ public class CurrentFragment extends Fragment {
 
         return rootView;
     }
+    public Context getRecyclerViewContext() {
+        return recyclerView.getContext();
+    }
 
     private void onClickButtonAdd() {
         buttonAddNote.setOnClickListener(new View.OnClickListener() {

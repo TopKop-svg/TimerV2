@@ -20,6 +20,7 @@ public class Note {
     private final boolean isTime;
     //private boolean isNotify;
     private boolean isOnClickStart = true;
+    private boolean isHint;
 
     private ArrayList<SubNote> subNotesList;
 
@@ -36,6 +37,15 @@ public class Note {
         this.countAim = countAim;
         this.isTime = isTime;
         this.subNotesList = subNotesList;
+        isHint = true;
+    }
+
+    public boolean isHint() {
+        return isHint;
+    }
+
+    public void setHint(boolean hint) {
+        isHint = hint;
     }
 
     public int getId() {
