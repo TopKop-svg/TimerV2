@@ -155,7 +155,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
                 String currentCount = "0";
                 String goalCount = "0";
-                int countAim = 0;
+                int countAim = Integer.parseInt(editTextCount.getText().toString());
 
 
                 note = new Note(title, currentCount, goalCount, countAim, isTime, subNoteList);

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -82,6 +83,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                         }).start();
                     }
                 });
+                int sizeToDO = 0;
+                for (SubNote subNotes: note.getSubNotesList()){
+                    sizeToDO += subNotes.getCount();
+                }
+                view.textViewMainCountPointer.setText(sizeToDO + "/" + note.getCountAim());
+                view.progressBarMain.setMax(note.getCountAim());
+                view.progressBarMain.setProgress(sizeToDO);
             }
         }
 
@@ -147,23 +155,25 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
+        private TextView textView, textViewMainCountPointer;
         private RecyclerView recyclerView;
         private ImageButton buttonHint; private ImageView imageButtonDelete, imageButtonDone;
+        private ProgressBar progressBarMain;
         public NoteViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
             if (viewType == 0) {
-                textView = itemView.findViewById(R.id.textViewTypeTask);
                 recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
                 buttonHint = itemView.findViewById(R.id.buttonHint);
                 imageButtonDelete = itemView.findViewById(R.id.right_view);
             }
             else {
-                textView = itemView.findViewById(R.id.textViewTypeTask);
                 recyclerView = itemView.findViewById(R.id.recyclerViewSubtaskNote);
                 buttonHint = itemView.findViewById(R.id.buttonHint);
                 imageButtonDelete = itemView.findViewById(R.id.right_view);
+                textViewMainCountPointer = itemView.findViewById(R.id.textViewMainCountPointer);
+                progressBarMain = itemView.findViewById(R.id.progressBarMain);
             }
+            textView = itemView.findViewById(R.id.textViewTypeTask);
 
         }
     }
