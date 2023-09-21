@@ -131,7 +131,7 @@ public class AddNoteActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                subNoteList.add(new SubNote(" ", 0));
+                subNoteList.add(new SubNote(" ", 0, 10));
                 addNoteAdapter.notifyDataSetChanged();
             }
         });

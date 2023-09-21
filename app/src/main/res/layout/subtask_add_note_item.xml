@@ -18,9 +18,27 @@
         android:id="@+id/editTextCount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:textAlignment="center"
         android:maxLength="6"
         android:hint="Count"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:textSize="30dp"
+        android:text="/"
+        android:textAlignment="center"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/editTextAimCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:textAlignment="center"
+        android:maxLength="6"
+        android:hint="Aim"/>
 
 </LinearLayout>

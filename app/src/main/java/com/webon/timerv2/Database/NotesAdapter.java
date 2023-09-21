@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapter;
 import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapterCount;
 import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapterTime;
 import com.webon.timerv2.Fragments.CurrentFragment;

@@ -112,6 +112,16 @@
                 android:layout_weight="1"
                 app:srcCompat="@android:drawable/ic_menu_rotate" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewMainCountPointer"
+            android:layout_width="170dp"
+            android:layout_height="57dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

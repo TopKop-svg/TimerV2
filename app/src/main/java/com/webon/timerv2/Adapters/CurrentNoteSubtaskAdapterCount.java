@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,11 +42,13 @@ public class CurrentNoteSubtaskAdapterCount  extends RecyclerView.Adapter<Curren
     public void onBindViewHolder(@NonNull CurrentNoteSubtaskAdapterCount.ViewHolder holder, int position) {
         SubNote item = itemList.get(position);
         holder.progressBar.setMax(10);
+        holder.textView.setText(item.getCount() + "/" + item.getAimCount());
         holder.progressBar.setProgress(item.getCount());
         holder.buttonLess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 item.setCount(item.getCount()-1);
+                holder.textView.setText(item.getCount()+"/10");
                 holder.progressBar.setProgress(item.getCount());
                 onSubtaskClickListener.onSubtaskClick(item);
 
@@ -56,6 +59,7 @@ public class CurrentNoteSubtaskAdapterCount  extends RecyclerView.Adapter<Curren
             @Override
             public void onClick(View v) {
                 item.setCount(item.getCount()+1);
+                holder.textView.setText(item.getCount()+"/10");
                 holder.progressBar.setProgress(item.getCount());
                 onSubtaskClickListener.onSubtaskClick(item);
             }
@@ -71,12 +75,15 @@ public class CurrentNoteSubtaskAdapterCount  extends RecyclerView.Adapter<Curren
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ProgressBar progressBar;
         private ImageButton buttonLess, buttonMore;
+        private TextView textView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             progressBar = itemView.findViewById(R.id.progressBarSubtask);
             buttonLess = itemView.findViewById(R.id.buttonLess);
             buttonMore = itemView.findViewById(R.id.buttonMore);
+            textView = itemView.findViewById(R.id.textViewCurrentCountSubtask);
+
         }
     }
 }
