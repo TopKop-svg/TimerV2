@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapter;
+import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapterCount;
+import com.webon.timerv2.Adapters.CurrentNoteSubtaskAdapterTime;
 import com.webon.timerv2.Fragments.CurrentFragment;
 import com.webon.timerv2.MainActivity;
 import com.webon.timerv2.Notes.Note;
+import com.webon.timerv2.Notes.SubNote;
 import com.webon.timerv2.R;
 
 import java.util.ArrayList;
@@ -60,12 +63,30 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         view.textView.setText(note.getTitle());
 
         if (!note.getSubNotesList().isEmpty()){
-            CurrentNoteSubtaskAdapter currentNoteSubtaskAdapter = new CurrentNoteSubtaskAdapter(note.getSubNotesList());
-            view.recyclerView.setAdapter(currentNoteSubtaskAdapter);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(new CurrentFragment().getRecyclerViewContext());
-            view.recyclerView.setLayoutManager(layoutManager);
-
+            if (note.isTime()){
+                CurrentNoteSubtaskAdapterTime currentNoteSubtaskAdapterTime = new CurrentNoteSubtaskAdapterTime(note.getSubNotesList());
+                view.recyclerView.setAdapter(currentNoteSubtaskAdapterTime);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(new CurrentFragment().getRecyclerViewContext());
+                view.recyclerView.setLayoutManager(layoutManager);
+            } else {
+                CurrentNoteSubtaskAdapterCount currentNoteSubtaskAdapterCount = new CurrentNoteSubtaskAdapterCount(note.getSubNotesList());
+                view.recyclerView.setAdapter(currentNoteSubtaskAdapterCount);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(new CurrentFragment().getRecyclerViewContext());
+                view.recyclerView.setLayoutManager(layoutManager);
+                currentNoteSubtaskAdapterCount.setOnSubtaskClickListener(new CurrentNoteSubtaskAdapterCount.OnSubtaskClickListener() {
+                    @Override
+                    public void onSubtaskClick(SubNote subNote) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                noteDatabase.notesDao().update(note);
+                            }
+                        }).start();
+                    }
+                });
+            }
         }
+
 
         view.buttonHint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +151,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private RecyclerView recyclerView;
-        private Button buttonHint; private ImageView imageButtonDelete, imageButtonDone;
+        private ImageButton buttonHint; private ImageView imageButtonDelete, imageButtonDone;
         public NoteViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
             if (viewType == 0) {

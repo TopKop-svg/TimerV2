@@ -3,8 +3,6 @@ package com.webon.timerv2.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
@@ -16,26 +14,25 @@ import com.webon.timerv2.R;
 
 import java.util.ArrayList;
 
-public class CurrentNoteSubtaskAdapter extends RecyclerView.Adapter<CurrentNoteSubtaskAdapter.ViewHolder>{
+public class CurrentNoteSubtaskAdapterTime  extends RecyclerView.Adapter<CurrentNoteSubtaskAdapterTime.ViewHolder>{
     private ArrayList<SubNote> itemList;
 
-    public CurrentNoteSubtaskAdapter(ArrayList<SubNote> itemList) {
+    public CurrentNoteSubtaskAdapterTime(ArrayList<SubNote> itemList) {
         this.itemList = itemList;
     }
 
     @NonNull
     @Override
-    public CurrentNoteSubtaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CurrentNoteSubtaskAdapterTime.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subtask_current_note_item_time, parent, false);
-        return new CurrentNoteSubtaskAdapter.ViewHolder(view);
+        return new CurrentNoteSubtaskAdapterTime.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CurrentNoteSubtaskAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CurrentNoteSubtaskAdapterTime.ViewHolder holder, int position) {
         SubNote item = itemList.get(position);
         holder.progressBar.setMax(10);
         holder.progressBar.setProgress(item.getCount());
-
 
     }
 
@@ -55,4 +52,3 @@ public class CurrentNoteSubtaskAdapter extends RecyclerView.Adapter<CurrentNoteS
         }
     }
 }
-

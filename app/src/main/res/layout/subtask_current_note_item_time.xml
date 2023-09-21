@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginLeft="5dp"
@@ -14,7 +15,7 @@
         android:id="@+id/textViewCurrentCountSubtask"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="0/10"
         android:textAlignment="center"
         android:textSize="30dp"
@@ -26,15 +27,13 @@
         android:progressDrawable="@drawable/progress_bar_style"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="7" />
 
-    <Button
-        android:id="@+id/buttonPlay"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+    <ImageButton
+        android:id="@+id/imageButtonPlay"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:hint="play"
-        android:maxLength="6"
-        android:textAlignment="center" />
+        app:srcCompat="@android:drawable/ic_media_play" />
 
 </LinearLayout>
